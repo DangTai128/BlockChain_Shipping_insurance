@@ -117,6 +117,7 @@ export const useMetaMask = () => {
       try {
         const connectedAccount = await metaMaskService.getAccount();
         if (connectedAccount) {
+          await metaMaskService.initProvider(); // Ensure provider is initialized
           setAccount(connectedAccount);
           setIsConnected(true);
           await refreshBalance();

@@ -64,7 +64,11 @@ const PolicyList = () => {
   };
 
   const formatAmount = (amount) => {
-    return amount.toFixed(4);
+    const num = parseFloat(amount);
+    if (isNaN(num)) {
+      return '0.0000'; // Trả về giá trị mặc định nếu không phải là số
+    }
+    return num.toFixed(4);
   };
 
   if (!isConnected) {

@@ -59,13 +59,13 @@ const CreatePolicyForm = ({ onPolicyCreated }) => {
 
       // Save to database
       await policyAPI.create({
-        shipment_id: formData.shipmentId,
-        coverage_amount: parseFloat(formData.coverageAmount),
+        shipmentId: formData.shipmentId,
+        coverageAmount: parseFloat(formData.coverageAmount),
         duration: duration * 24 * 60 * 60,
         userAddress: account
       });
 
-      setSuccess(`Hợp đồng bảo hiểm đã được tạo thành công! TX: ${tx.transactionHash}`);
+      setSuccess(`Hợp đồng bảo hiểm đã được tạo thành công! TX: ${tx.hash}`);
       
       // Reset form
       setFormData({
