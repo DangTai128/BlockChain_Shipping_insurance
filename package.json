@@ -1,0 +1,34 @@
+{
+  "name": "shipping-insurance-blockchain",
+  "version": "1.0.0",
+  "description": "Dự án blockchain bảo hiểm vận chuyển cho sinh viên đại học",
+  "main": "index.js",
+  "scripts": {
+    "dev:all": "concurrently \"npm run dev:contracts:smart\" \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:oracle\"",
+    "dev:all:preserve": "concurrently \"npm run dev:contracts:preserve\" \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:oracle\"",
+    "dev:contracts": "cd contracts && npx hardhat node",
+    "dev:contracts:smart": "cd contracts && node scripts/start-node-with-deploy.js",
+    "dev:contracts:preserve": "cd contracts && node scripts/start-persistent-node.js",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm start",
+    "dev:oracle": "cd oracle && npm start",
+    "install:all": "npm install && cd contracts && npm install && cd ../backend && npm install && cd ../frontend && npm install && cd ../oracle && npm install",
+    "setup:env": "node scripts/setup-env.js",
+    "build:contracts": "cd contracts && npm run compile && npm run deploy",
+    "build:contracts:preserve": "cd contracts && npm run compile && npm run deploy:preserve",
+    "deploy": "cd contracts && npx hardhat run scripts/smart-deploy.js --network localhost",
+    "deploy:preserve": "cd contracts && npx hardhat run scripts/deploy-persistent.js --network localhost_persistent",
+    "test:contracts": "cd contracts && npm test",
+    "test:backend": "cd backend && npm test",
+    "setup": "npm run install:all && npm run build:contracts",
+    "setup:preserve": "npm run install:all && npm run build:contracts:preserve",
+    "reset:blockchain": "cd contracts && rm -rf blockchain-state contract-state.json && echo 'Blockchain state reset'",
+    "backup:blockchain": "cd contracts && tar -czf blockchain-backup-$(date +%Y%m%d-%H%M%S).tar.gz blockchain-state contract-state.json && echo 'Blockchain state backed up'"
+  },
+  "keywords": ["blockchain", "insurance", "shipping", "ethereum", "react", "nodejs"],
+  "author": "Sinh viên đại học",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
